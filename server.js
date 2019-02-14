@@ -8,7 +8,7 @@
 
 
 // Local Server Path
-const LOCAL_PATH='./static';
+const LOCAL_PATH='./';
 const WELCOME_PAGE_PATH='index.html';
 const PORT='3000';
 
