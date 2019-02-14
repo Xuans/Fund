@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>黄金</title>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="./static/fund.css" />
+</head>
+
+<body>
+    <padding both top bottom style="height:calc(100% - 2em)">
+        <gloden>
+            <loading />
+        </gloden>
+    </padding>
+    <script src="./static/jquery.min.js"></script>
+    <script src="./static/jquery.simple.websocket.min.js"></script>
+    <style>
+        gloden{
+            height:100%;
+        }
+    </style>
+    <script type="text/javascript">
+    (function(global,$,undefined){
+        const webSocket = 
+            $.simpleWebSocket({ 
+                url: 'wss://stats-node3.jin10.com:8001/socket.io/?EIO=3&transport=websocket&sid=fDATjlgWLhg43u9fEVuF' 
+            }).listen((msg)=>{
+                debugger;
+            });
+        //debugger;
+    }(this,$));
+    
+    </script>
+</body>
+</html>

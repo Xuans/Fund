@@ -36,9 +36,20 @@ app.use(cors());
 //parser
 app.use(koaBody());
 
+//websocket
+const wsProxy = proxy('wss://stats-node3.jin10.com:8001/', { changeOrigin: true })
+ 
+app.use(wsProxy)
+ 
+var server = app.listen(3000)
+
+
+
 //setting routers
 app.use(main);
 
 app.use(router.routes());
 
-app.listen(PORT);
+const server=app.listen(PORT);
+
+server.on('upgrade', wsProxy.upgrade) // <-- subscribe to http 'upgrade'
