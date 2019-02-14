@@ -1,0 +1,17 @@
+fund{
+    overflow: auto;
+    width: 100%;
+}
+
+fund table{
+    border: 1px solid #efefef;
+    border-collapse: collapse;
+    min-width:100%;
+    overflow:visible;
+}
+fund table th,
+fund table td{
+    border: 1px solid #efefef;
+    white-space: nowrap;
+    padding: 8px 1.5em;
+}
