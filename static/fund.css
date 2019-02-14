@@ -1,17 +1,73 @@
-fund{
-    overflow: auto;
-    width: 100%;
+body{
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
 }
 
-fund table{
+scroll-view,.scroll-view{
+    display:flex;
+}
+.scroll-content{
+    display:flex;
+    flex:1;
+    overflow:auto;
+}
+
+text{
+    padding: .25em;
+    line-height: 2.5;
+}
+
+padding{
+    display: block;
+}
+padding[top]{
+    padding-top:1em;
+}
+padding[both]{
+    padding-left:1em;
+    padding-right: 1em;
+}
+padding[bottom]{
+    padding-bottom:1em;
+}
+
+
+table.fund{
     border: 1px solid #efefef;
     border-collapse: collapse;
-    min-width:100%;
-    overflow:visible;
+    margin:0 auto;
+    overflow: auto;
 }
-fund table th,
-fund table td{
+table.fund th,
+table.fund td{
     border: 1px solid #efefef;
     white-space: nowrap;
     padding: 8px 1.5em;
 }
+
+
+fund{
+    display:block;
+    min-width:800px;
+    max-width:1920px;
+    margin: 0 auto;
+    overflow: hidden;
+    height: calc(100% - 2em);
+    border: 1px solid #efefef;
+    border-radius: 6px;
+}
+fund table.fund{
+    border-left:none;
+    border-right:none;
+}
+fund text{
+    background-color: #efefef;
+    text-indent: 1em;
+}
+

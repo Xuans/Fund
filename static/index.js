@@ -72,14 +72,17 @@
             const recordsTotal = response.recordsTotal;
             const data = response.data;
             const str = `
-            <p>总条数：${recordsTotal}，市盈率小于等于${rate}的总条数：${data.length}</p>
-            <scroll-view>
-                <table>
-                    <thead><tr>${header.map(h=>`<th>${h}</th>`).join('')}</tr></thead>
-                    <tbody>
-                        ${data.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}
-                    </tbody>
-                </table>
+            <scroll-view style="height:100%;flex-direction:column;">
+                <text>总条数：${recordsTotal}，市盈率小于等于${rate}的总条数：${data.length}</text>
+                <div class="scroll-content">
+                    <table class="fund" style="width:auto;">
+                        <thead><tr>${header.map(h=>`<th>${h}</th>`).join('')}</tr></thead>
+                        <tbody>
+                            ${data.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}
+                        </tbody>
+                    </table>
+                </div>
+                <text>更新时间：${new Date().toLocaleString()}</text>
             </scroll-view>
         `;
     
