@@ -15,7 +15,7 @@
         </gloden>
     </padding>
     <script src="./static/jquery.min.js"></script>
-    <script src="./static/jquery.simple.websocket.min.js"></script>
+    <script src="./static/socket.io.js"></script>
     <style>
         gloden{
             height:100%;
@@ -23,13 +23,12 @@
     </style>
     <script type="text/javascript">
     (function(global,$,undefined){
-        const webSocket = 
-            $.simpleWebSocket({ 
-                url: 'wss://stats-node3.jin10.com:8001/socket.io/?EIO=3&transport=websocket&sid=fDATjlgWLhg43u9fEVuF' 
-            }).listen((msg)=>{
-                debugger;
-            });
-        //debugger;
+        const socket = io('ws://localhost:3000/aaaa');
+        //const socket = io('wss://sshibiocbo.jin10.com:8082/socket.io/?EIO=3&transport=websocket&sid=aYiPZwo79aGiCcWLUAiE');
+
+          socket.on('getMsg', data => {
+              console.log('服务端消息：',  data);
+          });
     }(this,$));
     
     </script>
