@@ -34,8 +34,8 @@ const mkdir = (dirname) => {
 
 	list.push(dirname);
 	while (
-		(parent = path.dirname(list[list.length - 1])) !== list[list.length - 1]
-		&& parent
+		(parent = path.dirname(list[list.length - 1])) !== list[list.length - 1] &&
+		parent
 	) {
 		list.push(parent);
 	}
@@ -68,7 +68,7 @@ router.post('/uploadImg', async (ctx, next) => {
 			const filePath = path.join(
 				tmpdir,
 				file.name
-					.replace(/^.*(\.[a-z0-9A-Z]{1,})$/, Math.ceil(Math.random() * 1e7) + '$1'));
+				.replace(/^.*(\.[a-z0-9A-Z]{1,})$/, Math.ceil(Math.random() * 1e7) + '$1'));
 
 			const reader = fs.createReadStream(file.path);
 			const writer = fs.createWriteStream(filePath);
@@ -97,33 +97,36 @@ app.use(proxy({
 }));
 
 //parser
-app.use(koaBody({ multipart: true }));
+app.use(koaBody({
+	multipart: true
+}));
 
 app.use(main);
 
 app.use(router.routes());
 //app.listen(PORT);
 
-const socket = require('socket.io');
-const server = require('http').createServer(app.callback());
-const io = socket(server);
-io.on('connection', ins => {
-	console.log('初始化成功！下面可以用socket绑定事件和触发事件了');
 
-	debugger;
-	const remote = socket('wss://sshibiocbo.jin10.com:8082/socket.io/?EIO=3&transport=websocket&sid=aYiPZwo79aGiCcWLUAiE');
+//https、socket、proxy
+const socket = require('./server/socket');
+const callback=app.callback();
 
-	remote.on('connect', () => {
-		ins.emit('getMsg', 'success');
-	})
-
-	ins.on('send', data => {
-		console.log('客户端发送的内容：', data);
-		ins.emit('getMsg', '我是返回的消息... ...');
-	})
-
-	setTimeout(() => {
-		ins.emit('getMsg', '我是初始化3s后的返回消息... ...')
-	}, 3000)
+const server = require('https').createServer({
+	key: fs.readFileSync(path.join(LOCAL_PATH, './ssl/214543595410729.key'), 'utf8'),
+	cert: fs.readFileSync(path.join(LOCAL_PATH, './ssl/214543595410729.crt'), 'utf8')
+}, function (req, res) {
+	console.log(req.url);
+	switch (req.url) {
+		case '':
+			socket.proxy(req, res);
+			break;
+		default:
+			callback(req, res);
+			break;
+	}
 });
+
+socket.start(server, PORT);
+
+
 server.listen(PORT);

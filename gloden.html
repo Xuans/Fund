@@ -23,12 +23,17 @@
     </style>
     <script type="text/javascript">
     (function(global,$,undefined){
-        const socket = io('ws://localhost:3000/aaaa');
-        //const socket = io('wss://sshibiocbo.jin10.com:8082/socket.io/?EIO=3&transport=websocket&sid=aYiPZwo79aGiCcWLUAiE');
+        const socket = io('wss://localhost:3000/');
+        //const socket = io('wss://sshibiocbo.jin10.com:8082/');
 
-          socket.on('getMsg', data => {
+          socket.on('message', data => {
               console.log('服务端消息：',  data);
           });
+//           socket.on('price list', data => {
+//               console.log('服务端消息：',  data);
+//           });
+
+          global.socket=socket;
     }(this,$));
     
     </script>
