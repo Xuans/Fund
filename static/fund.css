@@ -19,7 +19,7 @@ scroll-view,.scroll-view{
 }
 
 text{
-    padding: .25em;
+    padding: .125em;
     line-height: 2.5;
 }
 
@@ -48,7 +48,7 @@ table.fund th,
 table.fund td{
     border: 1px solid #efefef;
     white-space: nowrap;
-    padding: 8px 1.5em;
+    padding: 4px 0.75em;
 }
 
 
