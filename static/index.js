@@ -93,6 +93,6 @@
     };
 
     //1分钟刷新一次
-    setInterval(refreshFundInfoHandler,1*60*1000);
+    //setInterval(refreshFundInfoHandler,1*60*1000);
     refreshFundInfoHandler();
 }(this));
