@@ -23,6 +23,9 @@ const httpRequest = require('request');
 const fs = require('fs.promised');
 const cors = require('koa-cors');
 const path = require('path');
+const https=require('https');
+
+
 const main = serve(LOCAL_PATH);
 
 //methods
@@ -111,22 +114,17 @@ app.use(router.routes());
 const socket = require('./server/socket');
 const callback=app.callback();
 
-const server = require('https').createServer({
+const server = https.createServer({
 	key: fs.readFileSync(path.join(LOCAL_PATH, './ssl/214543595410729.key'), 'utf8'),
 	cert: fs.readFileSync(path.join(LOCAL_PATH, './ssl/214543595410729.crt'), 'utf8')
 }, function (req, res) {
-	console.log(req.url);
-	switch (req.url) {
-		case '':
-			socket.proxy(req, res);
-			break;
-		default:
-			callback(req, res);
-			break;
-	}
+	callback(req, res);
 });
 
 socket.start(server, PORT);
+server.on('upgrade', (req, client, head) => {
+	socket.proxy(req,client,head);
+});
 
 
 server.listen(PORT);
